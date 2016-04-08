@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'JAPIKit_Example', :exclusive => true do
+  pod 'JAPIKit', :path => '../'
+end
+
+target 'JAPIKit_Tests', :exclusive => true do
+  pod 'JAPIKit', :path => '../'
+
+  
+end
