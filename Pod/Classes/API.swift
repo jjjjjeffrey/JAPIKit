@@ -54,26 +54,20 @@ public protocol APIRequestable {
     func verify(response: APIResponse) -> APIResponseVerifyResult<DataType, ErrorType>
 }
 
-public protocol Notification: RawRepresentable {
+public protocol Notification {
     func post(object anObject: AnyObject?, userInfo aUserInfo: [NSObject : AnyObject]?)
     func addObserver(observer: AnyObject, selector aSelector: Selector, object anObject: AnyObject?)
     static func removeAll(observer: AnyObject)
 }
 
-public extension Notification {
+public extension Notification where Self: RawRepresentable, Self.RawValue == String {
     
     public func post(object anObject: AnyObject? = nil, userInfo aUserInfo: [NSObject : AnyObject]? = nil) {
-        assert(self.rawValue is String, "RawValue must be String type")
-        if let name = self.rawValue as? String {
-            NSNotificationCenter.defaultCenter().postNotificationName(name, object: anObject, userInfo: aUserInfo)
-        }
+        NSNotificationCenter.defaultCenter().postNotificationName(self.rawValue, object: anObject, userInfo: aUserInfo)
     }
     
     public func addObserver(observer: AnyObject, selector aSelector: Selector, object anObject: AnyObject? = nil) {
-        assert(self.rawValue is String, "RawValue must be String type")
-        if let name = self.rawValue as? String {
-            NSNotificationCenter.defaultCenter().addObserver(observer, selector: aSelector, name: name, object: anObject)
-        }
+        NSNotificationCenter.defaultCenter().addObserver(observer, selector: aSelector, name: self.rawValue, object: anObject)
     }
     
     static public func removeAll(observer: AnyObject) {

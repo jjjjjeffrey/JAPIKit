@@ -1,6 +1,6 @@
 PODS:
-  - Alamofire (3.3.1)
-  - JAPIKit (0.1.0):
+  - Alamofire (3.4.0)
+  - JAPIKit (1.0.0):
     - Alamofire (~> 3.0)
     - SwiftyJSON (~> 2.0)
   - SwiftyJSON (2.3.2)
@@ -10,11 +10,11 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   JAPIKit:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
-  JAPIKit: 1be2467b0b027a9c04314917b8edd1fc0f95aaec
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  JAPIKit: 1a29156cb651c69b9e12707d7192b42a460221b4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0
