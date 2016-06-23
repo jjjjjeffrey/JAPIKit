@@ -55,6 +55,8 @@ public protocol APIRequestable {
 }
 
 public protocol Notification {
+    
+    var name: String { get }
     func post(object anObject: AnyObject?, userInfo aUserInfo: [NSObject : AnyObject]?)
     func addObserver(observer: AnyObject, selector aSelector: Selector, object anObject: AnyObject?)
     static func removeAll(observer: AnyObject)
@@ -62,12 +64,16 @@ public protocol Notification {
 
 public extension Notification where Self: RawRepresentable, Self.RawValue == String {
     
+    var name: String {
+        return "\(Self.self).\(self.rawValue)"
+    }
+    
     public func post(object anObject: AnyObject? = nil, userInfo aUserInfo: [NSObject : AnyObject]? = nil) {
-        NSNotificationCenter.defaultCenter().postNotificationName(self.rawValue, object: anObject, userInfo: aUserInfo)
+        NSNotificationCenter.defaultCenter().postNotificationName(self.name, object: anObject, userInfo: aUserInfo)
     }
     
     public func addObserver(observer: AnyObject, selector aSelector: Selector, object anObject: AnyObject? = nil) {
-        NSNotificationCenter.defaultCenter().addObserver(observer, selector: aSelector, name: self.rawValue, object: anObject)
+        NSNotificationCenter.defaultCenter().addObserver(observer, selector: aSelector, name: self.name, object: anObject)
     }
     
     static public func removeAll(observer: AnyObject) {
